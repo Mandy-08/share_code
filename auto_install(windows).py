@@ -90,4 +90,4 @@ for k in range(len(array_print)):
 
 
 #disconnect the network drive
-# os.system(r"net use * /d /y")
+os.system(r"net use * /d /y")
