@@ -1,8 +1,8 @@
+#import library
 import os
 import shutil
 import json
 import argparse
-
 
 # argument set
 parser = argparse.ArgumentParser(description='program select')
@@ -18,6 +18,7 @@ with open("./auto_test_print.json", "r") as file_list_print:
     list_print_data = json.load(file_list_print)
 
 args = parser.parse_args()
+
 
 #check for program of argument
 if args.sel_pro == '1':
@@ -49,7 +50,6 @@ else:
     quit()
 
 
-
 #connect the network drive
 os.system(r"net use z: \\[NETWORK ROUTE] /user:[ID] [PW]")
 
@@ -57,6 +57,7 @@ os.system(r"net use z: \\[NETWORK ROUTE] /user:[ID] [PW]")
 #store set
 src_dir = '[ROUTE]'
 dst_dir = '[ROUTE]'
+
 
 #check for dst_dir and create the dst_dir
 if not os.path.exists(dst_dir):
@@ -84,9 +85,6 @@ for i in range(len(array_program)):
 for k in range(len(array_print)):
     os.system(array_print[i]["install"])
     os.system(r"ping 127.0.0.1 -n 5")
-
-
-
 
 
 #disconnect the network drive
