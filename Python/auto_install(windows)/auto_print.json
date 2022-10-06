@@ -7,27 +7,27 @@
         
             [
                 {"file" : ["FILE OR FOLDER PATH"]},
-                {"install" : "cscript cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  prnport.vbs -a -r [PORT NAME] -h [PRINTER ADDRESS] -me -o raw -y [SNMP COMMUNITY] -i 1 -n 9100"},
-                {"install" : "rundll32 cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  printui.dll,PrintUIEntry /if /b "[PRINTER NAME]" /f [INF FILE PATH] /r "[PORT NAME]" /m "[PRINTER DRIVER NAME]" ;"},
-                {"install" : "rundll32 cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  printui.dll,PrintUIEntry /y /n "[PRINTER NAME]" ;"}
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & cscript prnport.vbs -a -r [PORT NAME] -h [PRINTER ADDRESS] -me -o raw -y [SNMP COMMUNITY] -i 1 -n 9100"},
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & rundll32 printui.dll,PrintUIEntry /if /b "[PRINTER NAME]" /f [INF FILE PATH] /r "[PORT NAME]" /m "[PRINTER DRIVER NAME]" ;"},
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & rundll32 printui.dll,PrintUIEntry /y /n "[PRINTER NAME]" ;"}
             ]
             ,
             "print_group_2":
         
             [
                 {"file" : ["FILE OR FOLDER PATH"]},
-                {"install" : "cscript cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  prnport.vbs -a -r [PORT NAME] -h [PRINTER ADDRESS] -me -o raw -y [SNMP COMMUNITY] -i 1 -n 9100"},
-                {"install" : "rundll32 cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  printui.dll,PrintUIEntry /if /b "[PRINTER NAME]" /f [INF FILE PATH] /r "[PORT NAME]" /m "[PRINTER DRIVER NAME]" ;"},
-                {"install" : "rundll32 cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  printui.dll,PrintUIEntry /y /n "[PRINTER NAME]" ;"}
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & cscript prnport.vbs -a -r [PORT NAME] -h [PRINTER ADDRESS] -me -o raw -y [SNMP COMMUNITY] -i 1 -n 9100"},
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & rundll32 printui.dll,PrintUIEntry /if /b "[PRINTER NAME]" /f [INF FILE PATH] /r "[PORT NAME]" /m "[PRINTER DRIVER NAME]" ;"},
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & rundll32 printui.dll,PrintUIEntry /y /n "[PRINTER NAME]" ;"}
             ]
             ,
             "print_group_3":
         
             [
                 {"file" : ["FILE OR FOLDER PATH"]},
-                {"install" : "cscript cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  prnport.vbs -a -r [PORT NAME] -h [PRINTER ADDRESS] -me -o raw -y [SNMP COMMUNITY] -i 1 -n 9100"},
-                {"install" : "rundll32 cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  printui.dll,PrintUIEntry /if /b "[PRINTER NAME]" /f [INF FILE PATH] /r "[PORT NAME]" /m "[PRINTER DRIVER NAME]" ;"},
-                {"install" : "rundll32 cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR &  printui.dll,PrintUIEntry /y /n "[PRINTER NAME]" ;"}
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & cscript prnport.vbs -a -r [PORT NAME] -h [PRINTER ADDRESS] -me -o raw -y [SNMP COMMUNITY] -i 1 -n 9100"},
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & rundll32 printui.dll,PrintUIEntry /if /b "[PRINTER NAME]" /f [INF FILE PATH] /r "[PORT NAME]" /m "[PRINTER DRIVER NAME]" ;"},
+                {"install" : "cd C:\\Windows\\System32\\Printing_Admin_Scripts\\ko-KR & rundll32 printui.dll,PrintUIEntry /y /n "[PRINTER NAME]" ;"}
             ]
     }
 }
