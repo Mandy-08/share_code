@@ -6,4 +6,4 @@
 
 * Save each file and result file to sharepoint.
 
-* I will send an email to the staff using powerautomatecloud.
+* I send search results and files by e-mail useing the Power Automage Web version.
