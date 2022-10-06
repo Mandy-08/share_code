@@ -2,7 +2,7 @@
 
 * Files provided by "U.S. Department of Commerce's International Trade Agency" are downloaded in csv.
 
-* Enterprises in ERP save it as a text file in an sql query.
+* lists of traders registered in the ERP is saved as a text file by using sql query.
 
 * Save each file and result file to sharepoint.
 
