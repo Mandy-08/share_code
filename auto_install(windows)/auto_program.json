@@ -1,0 +1,30 @@
+
+{
+    
+    "program_list":
+    {
+        "group_1":
+            [
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+               
+            ]
+        ,
+
+        "group_2":
+            [
+              {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+            ]
+        ,
+
+        "group_3":
+            [
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+                {"name": "[FILENAME]", "install": "[INSTALL COMMAND]"},
+            ]
+    }
+}
