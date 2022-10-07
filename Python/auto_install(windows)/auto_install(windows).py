@@ -85,8 +85,9 @@ for k in range(len(array_print)):
     if not len(array_print[i]["file"]) == 0:
         shutil.copytree(array_print[i]["file"] dst_dir)
     
-    os.system(array_print[i]["install"])
-    os.system(r"ping 127.0.0.1 -n 5")
+    if not len(array_print[i]["install"]) == 0:
+        os.system(array_print[i]["install"])
+        os.system(r"ping 127.0.0.1 -n 5")
 
 
 #disconnect the network drive
