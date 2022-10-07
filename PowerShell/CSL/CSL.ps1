@@ -7,39 +7,51 @@ $date_mm = get-date -format "MM"
 $date_dd = get-date -format "dd"
 $date_path = "${date_yy}\${date_mm}\${date_dd}"
 
+$holiday = "2022-10-10", "2023-01-23", "2023-01-24","2023-03-01","2023-05-05","2023-06-06","2023-08-15","2023-09-28","2023-09-29","2023-10-03","2023-10-09","2023-12-25"
+
+$check_holiday = $holiday | Select-String -Pattern $date_str
+
+if ($check_holiday -eq 0) {
+    exit
+}
+
 #variable for PATH
-$sharepoint_source = "[PATH]" #Go Live
-#$sharepoint_source = "[PATH]" #Deploy TEST
+$sharepoint_source = "[SHREPOINT PATH]" #Go Live
+#$sharepoint_source = "[SHREPOINT PATH]\deploy_test" #Deploy TEST
 $sharepoint_source_date = "${sharepoint_source}\${date_path}"
 $audit_file_path = "${sharepoint_source}\${date_yy}\ALL_RESULT"
 
 
-#variable for the Where to buy FILE
-$erp_list_where_to_buy_file = "${sharepoint_source_date}\ERP\${date_str}_[TEXT FILE NAME]"
-$result_where_to_buy_file = "${sharepoint_source_date}\RESULT\where_to_buy\${date_str}_[TEXT FILE NAME]" 
-$result_where_to_buy_match_file = "${sharepoint_source_date}\RESULT\where_to_buy\${date_str}_[TEXT FILE NAME]"
-$result_where_to_buy_match_file_temp = "${sharepoint_source_date}\RESULT\where_to_buy\${date_str}_[TEXT FILE NAME]"
+#variable for the where_to_buy FILE
+$erp_list_where_to_buy_file = "${sharepoint_source_date}\ERP\${date_str}_erp_where_to_buy.txt"
+$result_where_to_buy_all_file = "${sharepoint_source_date}\RESULT\where_to_buy\${date_str}_where_to_buy_result_all.txt" 
+$result_where_to_buy_match_file = "${sharepoint_source_date}\RESULT\where_to_buy\${date_str}_result_where_to_buy_only_match.txt"
+$result_where_to_buy_match_file_temp = "${sharepoint_source_date}\RESULT\where_to_buy\${date_str}_result_where_to_buy_only_match_temp.txt"
 
-#variable for the VENDOR_1 FILE
-$erp_list_vendor_1_file = "${sharepoint_source_date}\ERP\${date_str}_[TEXT FILE NAME]"
-$result_vendor_1_all_file = "${sharepoint_source_date}\RESULT\vendor_1\${date_str}_[TEXT FILE NAME]" 
-$result_vendor_1_match_file = "${sharepoint_source_date}\RESULT\vendor_1\${date_str}_[TEXT FILE NAME]"
-$result_vendor_1_match_file_temp = "${sharepoint_source_date}\RESULT\vendor_1\${date_str}_[TEXT FILE NAME]"
 
-#variable for the VENDOR_2 FILE
-$erp_list_vendor_2_file = "${sharepoint_source_date}\ERP\${date_str}_[TEXT FILE NAME]"
-$result_vendor_2_all_file = "${sharepoint_source_date}\RESULT\vendor_2\${date_str}_[TEXT FILE NAME]" 
-$result_vendor_2_match_file = "${sharepoint_source_date}\RESULT\vendor_2\${date_str}_[TEXT FILE NAME]"
-$result_vendor_2_match_file_temp = "${sharepoint_source_date}\RESULT\vendor_2\${date_str}_[TEXT FILE NAME]"
+#variable for the vendor_1 FILE
+$erp_list_vendor_1_file = "${sharepoint_source_date}\ERP\${date_str}_erp_vendor_1.txt"
+$result_vendor_1_all_file = "${sharepoint_source_date}\RESULT\vendor_1\${date_str}_result_vendor_1_all.txt" 
+$result_vendor_1_match_file = "${sharepoint_source_date}\RESULT\vendor_1\${date_str}_result_vendor_1_only_match.txt"
+$result_vendor_1_match_file_temp = "${sharepoint_source_date}\RESULT\vendor_1\${date_str}_result_vendor_1_only_match_temp.txt"
+
+
+#variable for the vendor_2 FILE
+$erp_list_vendor_2_file = "${sharepoint_source_date}\ERP\${date_str}_erp_vendor_2.txt"
+$result_vendor_2_all_file = "${sharepoint_source_date}\RESULT\vendor_2\${date_str}_result_vendor_2_all.txt" 
+$result_vendor_2_match_file = "${sharepoint_source_date}\RESULT\vendor_2\${date_str}_result_vendor_2_only_match.txt"
+$result_vendor_2_match_file_temp = "${sharepoint_source_date}\RESULT\vendor_2\${date_str}_result_vendor_2_only_match_temp.txt"
+
 
 #variable for CSL & AUDIT
 $csl_list_file = "${sharepoint_source_date}\CSL\${date_str}_csl.csv"
 $audit_file = "${audit_file_path}\${date_str}_resualt_all.txt"
 
+
 #variable for the segement count
 $match_count_where_to_buy = 0
-$match_count_vendor_1 = 0
 $match_count_vendor_2 = 0
+$match_count_vendor_1 = 0
 
 
 ###Preliminary TASK###
@@ -59,16 +71,15 @@ if ( -not (Test-Path ${audit_file_path}) ) {
 
 
 #Download csl source file
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $csl_file_download = new-object system.net.webclient
 $csl_file_download.DownloadFile("http://api.trade.gov/static/consolidated_screening_list/consolidated.csv",$csl_list_file)
+
 
 #Download ERP source file
 sqlcmd -s localhost -E -i "[SQL FILE PATH]" -h -1 -W -o "$erp_list_where_to_buy_file"
 sqlcmd -s localhost -E -i "[SQL FILE PATH]" -h -1 -W -o "$erp_list_vendor_1_file"
 sqlcmd -s localhost -E -i "[SQL FILE PATH]" -h -1 -W -o "$erp_list_vendor_2_file"
-
-
-
 
 
 #read the erp_list
@@ -80,13 +91,9 @@ $erp_list_vendor_2 = Get-Content $erp_list_vendor_2_file
 $csl_list = import-csv -Path $csl_list_file
 
 
-
-
 ###START MAIN TASK###
 
-
 #where_to_buy for
-
 for ($i=0; $i -lt $erp_list_where_to_buy.Length; $i++) {
 $csl_list_check_for_where_to_buy = $csl_list.name | Select-string -Pattern $erp_list_where_to_buy[$i]
 if ($csl_list_check_for_where_to_buy.Length -eq 0) {
@@ -97,7 +104,7 @@ Write-Output "--------------------------------------------------" >> $result_whe
 }
 
 else {
-$match_count_vendor = $match_count_where_to_buy + 1
+$match_count_where_to_buy = $match_count_where_to_buy + 1
 Write-Output "--------------------------------------------------" >> $result_where_to_buy_all_file
 Write-Output $erp_list_where_to_buy[$i] 'Find!' >> $result_where_to_buy_all_file
 Write-Output $csl_list_check_for_where_to_buy >> $result_where_to_buy_all_file
@@ -187,9 +194,6 @@ if ( (test-path $result_vendor_2_match_file) ) {
     Write-Output $re_only_vendor_2 >> $result_vendor_2_match_file
 
 }
-
-
-
 
 
 #MERGE AUDIT FILE
