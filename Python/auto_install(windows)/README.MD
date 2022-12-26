@@ -6,5 +6,6 @@ I created a shared forlder in the company and used it with all the files and fol
 
 Note link to the printer registration command
 
-https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=websearch&logNo=221336216970
-https://support.hp.com/kr-ko/document/c01753418
+- https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=websearch&logNo=221336216970
+
+- https://support.hp.com/kr-ko/document/c01753418
